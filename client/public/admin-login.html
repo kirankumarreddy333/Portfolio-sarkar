@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - SARKAR AEP</title>
+  <!-- Poppins Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-dark: #050505;
+      --bg-card: #101010;
+      --primary-red: #FF1E1E;
+      --hover-red: #E60012;
+      --red-shadow: rgba(255, 30, 30, 0.35);
+      --text-white: #FFFFFF;
+      --text-gray: #D8D8D8;
+      --border-card: rgba(255, 255, 255, 0.08);
+      --font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+    }
+
+    .login-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+      text-align: center;
+    }
+
+    .login-header {
+      margin-bottom: 28px;
+    }
+
+    .login-header .icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(255, 30, 30, 0.12);
+      border: 1px solid rgba(255, 30, 30, 0.3);
+      color: var(--primary-red);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      margin: 0 auto 16px;
+      box-shadow: 0 0 20px var(--red-shadow);
+    }
+
+    .login-header h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .flash-message {
+      display: none;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .flash-message.success {
+      display: block;
+      background-color: rgba(16, 185, 129, 0.15);
+      border: 1px solid #10b981;
+      color: #10b981;
+    }
+
+    .flash-message.error {
+      display: block;
+      background-color: rgba(255, 30, 30, 0.15);
+      border: 1px solid var(--primary-red);
+      color: var(--primary-red);
+    }
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-group {
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-gray);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .input-wrapper {
+      position: relative;
+    }
+
+    .input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 1rem;
+    }
+
+    .form-control {
+      width: 100%;
+      background-color: #050505;
+      border: 1px solid var(--border-card);
+      border-radius: 50px;
+      padding: 14px 20px 14px 46px;
+      color: var(--text-white);
+      font-family: var(--font-family);
+      font-size: 0.95rem;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-red);
+      box-shadow: 0 0 15px var(--red-shadow);
+    }
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-red);
+      color: var(--text-white);
+      border: none;
+      border-radius: 50px;
+      padding: 16px;
+      font-family: var(--font-family);
+      font-size: 1rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 8px 25px var(--red-shadow);
+      transition: all 0.3s ease;
+      margin-top: 10px;
+    }
+
+    .btn-submit:hover {
+      background-color: var(--hover-red);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 30, 30, 0.5);
+    }
+
+    .back-home {
+      margin-top: 24px;
+      display: inline-block;
+    }
+
+    .back-home a {
+      color: var(--text-gray);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-home a:hover {
+      color: var(--primary-red);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <div class="icon-box">
+          <i className="fa-solid fa-user-shield"></i>
+        </div>
+        <h2>Admin Login</h2>
+      </div>
+
+      <!-- Flash Message Area -->
+      <div id="flashMessage" class="flash-message"></div>
+
+      <!-- Form -->
+      <form id="loginForm" class="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-user"></i>
+            <input type="text" id="username" class="form-control" placeholder="Enter username" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <i class="fa-solid fa-lock"></i>
+            <input type="password" id="password" class="form-control" placeholder="Enter password" required />
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit">
+          <i class="fa-solid fa-right-to-bracket"></i> Login
+        </button>
+      </form>
+
+      <div class="back-home">
+        <a href="/">
+          <i class="fa-solid fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const flashMessage = document.getElementById('flashMessage');
+    let timer = null;
+
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+
+      if (timer) clearTimeout(timer);
+
+      if (username === 'admin' && password === '1234') {
+        flashMessage.className = 'flash-message success';
+        flashMessage.innerHTML = '<i class="fa-solid fa-circle-check"></i> Login simulated — backend not available on static host.';
+        
+        // Redirect to dashboard after 1.5 seconds if static page exists
+        setTimeout(() => {
+          window.location.href = 'admin-dashboard.html';
+        }, 1500);
+      } else {
+        flashMessage.className = 'flash-message error';
+        flashMessage.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Invalid Username or Password.';
+      }
+
+      // Auto hide after 6 seconds
+      timer = setTimeout(() => {
+        flashMessage.style.display = 'none';
+      }, 6000);
+    });
+  </script>
+
+</body>
+</html>

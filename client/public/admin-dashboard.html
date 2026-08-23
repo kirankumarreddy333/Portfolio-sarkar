@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - SARKAR AEP</title>
+  <!-- Poppins Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <style>
+    :root {
+      --bg-black: #000000;
+      --bg-dark: #050505;
+      --bg-card: #101010;
+      --bg-card-alt: #141414;
+      --primary-red: #FF1E1E;
+      --hover-red: #E60012;
+      --red-shadow: rgba(255, 30, 30, 0.35);
+      --text-white: #FFFFFF;
+      --text-gray: #D8D8D8;
+      --border-card: rgba(255, 255, 255, 0.08);
+      --font-family: 'Poppins', Arial, sans-serif;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--bg-black);
+      color: var(--text-white);
+      min-height: 100vh;
+    }
+
+    /* Top Header */
+    .dashboard-header {
+      background-color: var(--bg-card);
+      border-bottom: 1px solid var(--border-card);
+      padding: 20px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(255, 30, 30, 0.15);
+      color: var(--primary-red);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.4rem;
+      box-shadow: 0 0 15px var(--red-shadow);
+    }
+
+    .header-left h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .btn-home {
+      background-color: var(--primary-red);
+      color: var(--text-white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 10px 24px;
+      border-radius: 50px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 5px 20px var(--red-shadow);
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-home:hover {
+      background-color: var(--hover-red);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 30, 30, 0.5);
+    }
+
+    /* Main Container */
+    .main-content {
+      max-width: 1240px;
+      margin: 40px auto;
+      padding: 0 24px;
+    }
+
+    /* Stat Cards Row */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+
+    .stat-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary-red);
+      box-shadow: 0 12px 30px var(--red-shadow);
+    }
+
+    .stat-info h3 {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .stat-info .stat-value {
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: var(--primary-red);
+    }
+
+    .stat-icon-wrapper {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background-color: #1a1a1a;
+      border: 1px solid var(--border-card);
+      color: var(--primary-red);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5rem;
+    }
+
+    /* Table Section */
+    .table-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-card);
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+    }
+
+    .table-title-box {
+      margin-bottom: 24px;
+    }
+
+    .table-title-box h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+    }
+
+    th {
+      background-color: var(--bg-card-alt);
+      color: var(--primary-red);
+      font-size: 0.85rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    td {
+      padding: 16px;
+      font-size: 0.9rem;
+      color: var(--text-gray);
+      border-bottom: 1px solid var(--border-card);
+    }
+
+    tbody tr:hover {
+      background-color: rgba(255, 30, 30, 0.04);
+    }
+
+    .action-btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-action-red {
+      background-color: var(--primary-red);
+      color: var(--text-white);
+      border: none;
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-action-red:hover {
+      background-color: var(--hover-red);
+      box-shadow: 0 4px 15px var(--red-shadow);
+    }
+
+    .btn-action-secondary {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+      border: 1px solid var(--border-card);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-action-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .notice-row td {
+      color: var(--primary-red);
+      font-weight: 600;
+      background-color: rgba(255, 30, 30, 0.05);
+    }
+
+    @media (max-width: 768px) {
+      .dashboard-header {
+        padding: 16px 20px;
+      }
+      .header-left h1 {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="dashboard-header">
+    <div class="header-left">
+      <div class="header-icon">
+        <i class="fa-solid fa-gauge-high"></i>
+      </div>
+      <h1>Admin Dashboard</h1>
+    </div>
+
+    <a href="/" class="btn-home">
+      <i class="fa-solid fa-house"></i> Home
+    </a>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    
+    <!-- 3 Stat Cards -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-info">
+          <h3>Total Messages</h3>
+          <div class="stat-value">12</div>
+        </div>
+        <div class="stat-icon-wrapper">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h3>Client Requests</h3>
+          <div class="stat-value">5</div>
+        </div>
+        <div class="stat-icon-wrapper">
+          <i class="fa-solid fa-user-check"></i>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-info">
+          <h3>Portfolio Status</h3>
+          <div class="stat-value" style="font-size: 1.4rem;">Active</div>
+        </div>
+        <div class="stat-icon-wrapper">
+          <i class="fa-solid fa-circle-check"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Messages Table -->
+    <div class="table-card">
+      <div class="table-title-box">
+        <h2>Client Inquiries & Messages</h2>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Project</th>
+              <th>Message</th>
+              <th>Action</th>
+              <th>Reply</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#101</td>
+              <td>Alex Mercer</td>
+              <td>alex@gaming.com</td>
+              <td>YouTube Reel Edit</td>
+              <td>Need high retention gaming trailer edit with VFX.</td>
+              <td>
+                <button class="btn-action-red" onclick="alert('Action simulated: Backend required')">
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </td>
+              <td>
+                <button class="btn-action-secondary" onclick="alert('Action simulated: Backend required')">
+                  <i class="fa-solid fa-reply"></i> Reply
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>#102</td>
+              <td>Sarah Connor</td>
+              <td>sarah@media.org</td>
+              <td>Thumbnail Design</td>
+              <td>Looking for 5 high CTR YouTube thumbnails for podcast.</td>
+              <td>
+                <button class="btn-action-red" onclick="alert('Action simulated: Backend required')">
+                  <i class="fa-solid fa-trash"></i> Delete
+                </button>
+              </td>
+              <td>
+                <button class="btn-action-secondary" onclick="alert('Action simulated: Backend required')">
+                  <i class="fa-solid fa-reply"></i> Reply
+                </button>
+              </td>
+            </tr>
+            <tr class="notice-row">
+              <td colspan="7">
+                <i class="fa-solid fa-triangle-exclamation"></i> Notice: Dashboard is static — dynamic actions & real database connections require backend services.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+
+</body>
+</html>
