@@ -33,7 +33,7 @@ const AdminLogin = () => {
     } else {
       setFlash({
         show: true,
-        message: "Invalid credentials. Use admin / 1234",
+        message: "Invalid credentials.",
         type: "error",
       });
     }
@@ -97,9 +97,6 @@ const AdminLogin = () => {
               </div>
             </div>
 
-            <div className="demo-credentials-badge">
-              <i className="fa-solid fa-key"></i> Demo Login: <strong>admin</strong> / <strong>1234</strong>
-            </div>
 
             <button type="submit" className="btn-submit">
               <i className="fa-solid fa-right-to-bracket"></i> Login to Dashboard
